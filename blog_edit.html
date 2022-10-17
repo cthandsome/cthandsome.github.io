@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客编辑页</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/blog_edit.css">
+    <!-- 引入依赖 -->
+    <link rel="stylesheet" href="editor.md-master/css/editormd.min.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="editor.md-master/lib/marked.min.js"></script>
+    <script src="editor.md-master/lib/prettify.min.js"></script>
+    <script src="editor.md-master/editormd.js"></script>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="nav">
+        <img src="./image/head.jpg" alt="">
+        <span class="title">我的博客系统</span>
+         <!-- 使用 span 把左右两侧的元素给撑开 -->
+         <span class="spacer"></span>
+        <a href="blog_list.html">主页</a>
+        <a href="blog_edit.html">写博客</a>
+        <a href="blog_login.html">注销</a>
+    </div>
+    <!-- 版心 -->
+    <div class="blog-edit-container">
+        <!-- 标题编辑区 -->
+        <div class="title">
+            <input type="text" placeholder="在这里写下文章标题" id="title">
+            <input type="button" value="发布文章" id="submit">
+        </div>
+        <!-- 内容编辑区 -->
+        <div id="editor">
+
+        </div>
+    </div>
+
+    <script>
+     
+        let editor = editormd("editor", {       
+            width: "100%",            
+            height: "500px",           
+            markdown: "# 在这里写下一篇博客",
+            path: "editor.md-master/lib/"
+        });
+    </script>
+</body>
+</html>

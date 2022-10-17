@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>login</title>
+		<style type="text/css">
+			#main {
+				width: 460px;
+				height: 340px;
+				margin: 0 auto;
+				margin-top: 140px;
+				border-radius: 50px;
+				box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+				border-radius: 56px;
+				border-radius: 56px;
+				box-shadow:  28px 28px 55px #b8b8b8,-28px -28px 55px #ffffff;
+				background: url(image/background.jpg);
+			}
+
+			.title {
+				font-size: 20px;
+				color: white;
+				font-weight: bold;
+				text-align: center;
+				padding-top: 20px;
+			}
+
+			.user_name,
+			.reg {
+				margin-top: 30px;
+				text-align: center;
+			}
+
+			.user_pwd,
+			.btn,
+			.reg {
+				text-align: center;
+			}
+
+			.user_name,
+			.user_pwd {
+				font-size: 16px;
+			}
+
+			.reg {
+				text-align: right;
+				margin-right: 40px;
+			}
+
+			.name-label,
+			.pwd-label {
+				width: 200px;
+				height: 30px;
+				margin-left: 140px;
+				text-align: left;
+				font-size: 14px;
+				color: red;
+			}
+
+			input {
+				height: 24px;
+			}
+
+			.btn1 {
+				margin-right: 10px;
+				background-color: rgb(244, 243, 243);
+				border: none;
+				width: 100px;
+				height: 34px;
+				text-align: center;
+				border-radius: 14px;
+				font-size: 15px;
+				margin-left: 80px;
+			}
+
+			.btn2 {
+				margin-right: 40px;
+				background-color: rgb(244, 243, 243);
+				border: none;
+				width: 100px;
+				height: 34px;
+				text-align: center;
+				border-radius: 14px;
+				font-size: 15px;
+			}
+
+			a {
+				text-decoration: none;
+				color: #A52A2A;
+			}
+		</style>
+		<script>
+			var flag1 = false;
+			var flag2 = false;
+			var flag3 = false;
+
+			function $(id) {
+				return document.getElementById(id);
+			}
+			//检查卡号
+			function checkId() {
+				$("error_name").innerText = "";
+				//1.获取输入的卡号
+				var userName = $("uname").value;
+				//2.判断用户名是不是为空
+				if (userName == "" || userName == null) {
+					$("error_name").innerText = "*用户名不能为空！";
+					//遇到错误就终止 返回
+					return;
+				}
+				//3.长度4~20
+				if (userName.length < 4 || userName.length > 20) {
+					$("error_name").innerText = "*长度在4~20之间";
+					return;
+				}
+				//4.用户名只能是数字、字母、下划线、字母开头
+				var userMatch = /^[a-zA-Z][a-zA-Z0-9_]*$/;
+				if (!userName.match(userMatch)) {
+					$("error_name").innerText = "* 以英文字母开头，只能包含英文字母、数 字、下划线";
+					return;
+				}
+				flag1 = true;
+			}
+			//输入密码
+			function pwdId1() {
+				$("error_pwd").innerText = "";
+				//1.获取输入的密码
+				var userpwd = $("upwd").value;
+				//2.判断密码是否为空
+				if (userpwd == "" || userpwd == null) {
+					$("error_pwd").innerText = "*密码不能为空！";
+					//遇到错误就终止 返回
+					return;
+				}
+				//3.长度8~25
+				if (userpwd.length < 8 || userpwd.length > 25) {
+					$("error_pwd").innerText = "*长度在8~25之间";
+					return;
+				}
+				flag2 = true;
+			}
+			//确认密码
+			function pwdId2() {
+				$("error_pwd_id").innerText = "";
+				//1.获取输入的密码
+				var userpwd = $("upwd").value;
+				var userpwdQR = $("upwdQR").value;
+				//2.判断密码是否为空
+				if (userpwd == "" || userpwd == null) {
+					$("error_pwd_id").innerText = "*密码不能为空！";
+					//遇到错误就终止 返回
+					return;
+				}
+				//3.密码一致
+				if (userpwdQR != userpwd) {
+					$("error_pwd_id").innerText = "*输入的两次密码不一致！";
+					return;
+				}
+				flag3 = true;
+			}
+			//认证按钮
+			function login() {
+				if (flag1 && flag2 && flag3) {
+					//只有三者同时满足要求时，才进行接下来的验证
+					//假设用户名为suser，密码为12345678
+					//1.获取输入的卡号、密码
+					var userName = $("uname").value;
+					var userpwd = $("upwd").value;
+
+					//2.判断卡号、密码是否正确
+					if (userName == "suser" && userpwd == "12345678") {
+						//说明认证成功，可以进行跳转
+						window.location.href = "blog_list.html";
+					} else {
+						//卡号或口令不正确！请重新输入。
+						alert("卡号或口令不正确！请重新输入。")
+					}
+				} else {
+					//否则检查卡号或口令是否符合规定
+					alert("检查卡号或口令是否符合规定!")
+				}
+			}
+
+			function mover() {
+				$("login_btn").style.background = "rgb(120,75,160)";
+				$("login_btn").style.color = "white";
+			}
+
+			function mout() {
+				$("login_btn").style.background = "rgb(244, 243, 243)";
+				$("login_btn").style.color = "black";
+			}
+		</script>
+	</head>
+	<body bgcolor="#99FFFF">
+		<p>账号：suser</p>
+		<p>密码：12345678</p>
+		<div id="main">
+			<div class="container">
+				<div class="title">博客登录</div>
+				<form action="">
+					<!-- 用户名 -->
+					<div class="user_name">
+						<span>用户名：&nbsp;&nbsp;&nbsp;&nbsp;</span>
+						<input type="text" id="uname" placeholder="请输入账户名" size="40px" onblur="checkId();" />
+						<!-- 用户名的错误提示信息 -->
+						<div class="name-label" id="error_name"></div>
+					</div>
+					<!-- 密码 -->
+					<div class="user_pwd">
+						<span>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</span>
+						<input type="password" id="upwd" placeholder="请输入密码" size="40px" onblur="pwdId1();" />
+						<div class="pwd-label" id="error_pwd"></div>
+					</div>
+					<!-- 确认密码 -->
+					<div class="user_pwd">
+						<span>确认密码：</span>
+						<input type="password" id="upwdQR" placeholder="请再次输入密码" size="40px" onblur="pwdId2();" />
+						<div class="pwd-label" id="error_pwd_id"></div>
+					</div>
+					<!-- 按钮 -->
+					<div class="btn">
+						<input type="button" value="登  录" class="btn1" id="login_btn" onclick="login();"
+							onmouseout="mout();" onmouseover="mover();" />
+						<input type="reset" value="重  置" class="btn2" />
+					</div>
+				</form>
+				<!-- 引导注册 -->
+				<div class="reg">
+					未注册？<a href="#">点击查看</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
